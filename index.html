@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task2</title>
+
+</head>
+<body>
+
+
+
+<div id="result"></div>
+
+<script>
+    let X = generateArray(10);
+    let Y = generateArray(10);
+    let Z = [];
+
+    for (let i = 0; i < X.length; i++) {
+        if (X[i] !== Y[i]) {
+            Z.push(1 / (X[i] - Y[i]));
+        } else {
+            Z.push(1);
+        }
+    }
+
+    document.getElementById('result').innerHTML += "<p>Початкові данні:</p>";
+    document.getElementById('result').innerHTML += "<code>X: " + JSON.stringify(X) + "</code>";
+    document.getElementById('result').innerHTML += "<code>Y: " + JSON.stringify(Y) + "</code>";
+    document.getElementById('result').innerHTML += "<code>Z: " + JSON.stringify(Z) + "</code>";
+
+    let maxIndex = Z.indexOf(Math.max(...Z));
+    let firstElement = Z[0];
+
+    Z[0] = Z[maxIndex];
+    Z[maxIndex] = firstElement;
+
+    document.getElementById('result').innerHTML += "<p>Масив Z після заміни місцями максимального та першого елементів:</p>";
+    document.getElementById('result').innerHTML += "<code>Z: " + JSON.stringify(Z) + "</code>";
+
+    for (let i = 0; i < Z.length - 1; i++) {
+        for (let j = 0; j < Z.length - i - 1; j++) {
+            if (Z[j] > Z[j + 1]) {
+                let temp = Z[j];
+                Z[j] = Z[j + 1];
+                Z[j + 1] = temp;
+            }
+        }
+    }
+
+    document.getElementById('result').innerHTML += "<p>Масив Z відсортовано за зростанням:</p>";
+    document.getElementById('result').innerHTML += "<code>Z: " + JSON.stringify(Z) + "</code>";
+
+    function generateArray(length) {
+        let randomArray = [];
+        for (let i = 0; i < length; i++) {
+            randomArray.push(Math.floor(Math.random() * 100));
+        }
+        return randomArray;
+    }
+</script>
+
+</body>
+</html>
